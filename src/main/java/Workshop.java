@@ -14,39 +14,79 @@ public class Workshop {
 
     // Método que encuentra el mayor de tres números enteros
     public int mayorDeTresNumeros(int a, int b, int c) {
-        // TODO: Implementar el método para retornar el mayor de los tres números enteros.
-        // Ejemplo: Si a = 3, b = 7, y c = 5, el resultado debería ser 7.
-        return 0;
-    }
+        int mayor = a;
 
+        if (b > mayor) {
+            mayor = b;
+        }
+        if (c > mayor) {
+            mayor = c;
+        }
+
+        return mayor;
+
+}
     // Método que retorna la tabla de multiplicar de un número
-    public int[] tablaMultiplicar(int numero, int limite) {
-        // TODO: Implementar el método para retornar la tabla de multiplicar del número dado.
-        // Ejemplo: Si numero = 2 y limite = 5, el resultado debería ser [2, 4, 6, 8, 10].
-        return new int[0];
+    public int[] tablaMultiplicar(int numero, int lim) {
+        int[] tb = new int[lim];
+
+        for (int i = 0; i < lim; i++) {
+            tb[i] = numero * (i + 1);
+        }
+
+        return tb;
     }
 
     // Método que calcula el factorial de un número entero
-    public int factorial(int n) {
-        // TODO: Implementar el método para calcular el factorial de un número entero.
-        // Ejemplo: Si n = 5, el resultado debería ser 120.
-        // Lanzar IllegalArgumentException si n es negativo.
-        return 0;
+    public int factorial(int n) {if (n < 0) {
+        throw new IllegalArgumentException("El factorial no está definido para números negativos.");
+    }
+
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+
+        return n * factorial(n - 1);
     }
 
     // Método que verifica si un número es primo
     public boolean esPrimo(int numero) {
+        int cont=0,b=0;
         // TODO: Implementar el método para verificar si un número es primo.
         // Ejemplo: Si numero = 7, el resultado debería ser true.
-        return false;
+        do{
+            cont++;
+            if(numero%cont==0){
+                b=b+1;
+            }
+            else{}
+
+        }while(cont<numero);
+        if(b==2){
+            return true;
+        }
+        else{
+        return false;}
     }
 
     // Método que genera una serie de Fibonacci
     public int[] serieFibonacci(int n) {
-        // TODO: Implementar el método para generar la serie de Fibonacci hasta el número n.
-        // Ejemplo: Si n = 5, el resultado debería ser [0, 1, 1, 2, 3].
-        // Lanzar IllegalArgumentException si n es negativo.
-        return new int[0];
+        if (n < 0) {
+            throw new IllegalArgumentException("n no puede ser negativo");
+        }
+        if (n == 0) {
+            return new int[0];
+        }
+
+        int[] serie = new int[n];
+        serie[0] = 0;
+        if (n > 1) {
+            serie[1] = 1;
+        }
+        for (int i = 2; i < n; i++) {
+            serie[i] = serie[i - 1] + serie[i - 2];
+        }
+        return serie;
     }
 
     // Método que suma todos los elementos de un arreglo
