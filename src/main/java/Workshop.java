@@ -218,23 +218,100 @@ public class Workshop {
 
     // Método que elimina los duplicados de un arreglo
     public int[] eliminarDuplicados(int[] arreglo) {
-        // TODO: Implementar el método para eliminar los duplicados de un arreglo.
-        // Ejemplo: Si arreglo = [1, 2, 2, 3, 4, 4, 5], el resultado debería ser [1, 2, 3, 4, 5].
-        return new int[0];
+        if (arreglo == null) {
+            throw new IllegalArgumentException("El arreglo no puede ser null");
+        }
+
+        if (arreglo.length == 0) {
+            return new int[0];
+        }
+
+        int[] copia = new int[arreglo.length];
+
+        for (int i = 0; i < arreglo.length; i++) {
+            copia[i] = arreglo[i];
+        }
+
+        for (int i = 0; i < copia.length - 1; i++) {
+            for (int j = 0; j < copia.length - 1 - i; j++) {
+                if (copia[j] > copia[j + 1]) {
+                    int temp = copia[j];
+                    copia[j] = copia[j + 1];
+                    copia[j + 1] = temp;
+                }
+            }
+        }
+
+        int contador = 1;
+        for (int i = 1; i < copia.length; i++) {
+            if (copia[i] != copia[i - 1]) {
+                contador++;
+            }
+        }
+
+        // --- 3. Crear arreglo final sin duplicados ---
+        int[] resultado = new int[contador];
+        int index = 0;
+        resultado[index++] = copia[0];
+
+        for (int i = 1; i < copia.length; i++) {
+            if (copia[i] != copia[i - 1]) {
+                resultado[index++] = copia[i];
+            }
+        }
+
+        return resultado;
     }
 
     // Método que combina dos arreglos en uno solo
     public int[] combinarArreglos(int[] arreglo1, int[] arreglo2) {
-        // TODO: Implementar el método para combinar dos arreglos en uno solo.
-        // Ejemplo: Si arreglo1 = [1, 2, 3, 4, 5] y arreglo2 = [6, 7, 8], el resultado debería ser [1, 2, 3, 4, 5, 6, 7, 8].
-        return new int[0];
+        if (arreglo1 == null || arreglo2 == null) {
+            throw new IllegalArgumentException("Ningún arreglo puede ser null");
+        }
+
+        int[] combinado = new int[arreglo1.length + arreglo2.length];
+
+        for (int i = 0; i < arreglo1.length; i++) {
+            combinado[i] = arreglo1[i];
+        }
+
+        for (int i = 0; i < arreglo2.length; i++) {
+            combinado[arreglo1.length + i] = arreglo2[i];
+        }
+
+        return combinado;
     }
 
     // Método que rota un arreglo n posiciones
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
-        // TODO: Implementar el método para rotar un arreglo n posiciones.
-        // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y posiciones = 2, el resultado debería ser [3, 4, 5, 1, 2].
-        return new int[0];
+        if (arreglo == null) {
+            throw new IllegalArgumentException("El arreglo no puede ser null");
+        }
+
+        int n = arreglo.length;
+
+        if (n == 0) {
+            return new int[0];
+        }
+
+        posiciones = posiciones % n;
+        if (posiciones < 0) {
+            posiciones += n;
+        }
+
+        int[] resultado = new int[n];
+
+        int index = 0;
+
+        for (int i = posiciones; i < n; i++) {
+            resultado[index++] = arreglo[i];
+        }
+
+        for (int i = 0; i < posiciones; i++) {
+            resultado[index++] = arreglo[i];
+        }
+
+        return resultado;
     }
 
     // Método que cuenta los caracteres en una cadena
