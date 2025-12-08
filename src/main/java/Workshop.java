@@ -163,23 +163,57 @@ public class Workshop {
 
     // Método que busca un elemento en un arreglo
     public boolean buscarElemento(int[] arreglo, int elemento) {
-        // TODO: Implementar el método para buscar un elemento en un arreglo.
-        // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y elemento = 3, el resultado debería ser true.
+        if (arreglo == null) {
+            throw new IllegalArgumentException("El arreglo no puede ser null");
+        }
+
+        for (int i = 0; i < arreglo.length; i++) {
+            if (arreglo[i] == elemento) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     // Método que invierte un arreglo
     public int[] invertirArreglo(int[] arreglo) {
-        // TODO: Implementar el método para invertir un arreglo.
-        // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser [5, 4, 3, 2, 1].
-        return new int[0];
+        if (arreglo == null) {
+            throw new IllegalArgumentException("El arreglo no puede ser null");
+        }
+
+        int[] invertido = new int[arreglo.length];
+
+        for (int i = 0; i < arreglo.length; i++) {
+            invertido[i] = arreglo[arreglo.length - 1 - i];
+        }
+
+        return invertido;
     }
 
-    // Método que ordena un arreglo en orden ascendente
+    // Método que ordena un arreglo en orden ascendente sin usar Arrays.sort
     public int[] ordenarArreglo(int[] arreglo) {
-        // TODO: Implementar el método para ordenar un arreglo en orden ascendente.
-        // Ejemplo: Si arreglo = [5, 4, 3, 2, 1], el resultado debería ser [1, 2, 3, 4, 5].
-        return new int[0];
+        if (arreglo == null) {
+            throw new IllegalArgumentException("El arreglo no puede ser null");
+        }
+
+        int[] copia = new int[arreglo.length];
+
+        for (int i = 0; i < arreglo.length; i++) {
+            copia[i] = arreglo[i];
+        }
+
+        for (int i = 0; i < copia.length - 1; i++) {
+            for (int j = 0; j < copia.length - 1 - i; j++) {
+                if (copia[j] > copia[j + 1]) {
+                    int temp = copia[j];
+                    copia[j] = copia[j + 1];
+                    copia[j + 1] = temp;
+                }
+            }
+        }
+
+        return copia;
     }
 
     // Método que elimina los duplicados de un arreglo
