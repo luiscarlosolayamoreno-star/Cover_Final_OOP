@@ -191,7 +191,7 @@ public class Workshop {
         return invertido;
     }
 
-    // Método que ordena un arreglo en orden ascendente sin usar Arrays.sort
+    // Método que ordena un arreglo en orden ascendente
     public int[] ordenarArreglo(int[] arreglo) {
         if (arreglo == null) {
             throw new IllegalArgumentException("El arreglo no puede ser null");
@@ -282,92 +282,101 @@ public class Workshop {
         return combinado;
     }
 
-    // Método que rota un arreglo n posiciones
+    // Método que rota un arreglo n posiciones hacia la derecha
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
         if (arreglo == null) {
             throw new IllegalArgumentException("El arreglo no puede ser null");
         }
-
         int n = arreglo.length;
-
         if (n == 0) {
             return new int[0];
         }
-
         posiciones = posiciones % n;
         if (posiciones < 0) {
             posiciones += n;
         }
 
         int[] resultado = new int[n];
-
+        int inicio = n - posiciones;
         int index = 0;
-
-        for (int i = posiciones; i < n; i++) {
+        for (int i = inicio; i < n; i++) {
             resultado[index++] = arreglo[i];
         }
-
-        for (int i = 0; i < posiciones; i++) {
+        for (int i = 0; i < inicio; i++) {
             resultado[index++] = arreglo[i];
         }
-
         return resultado;
     }
 
-    // Método que cuenta los caracteres en una cadena
+    // Método que cuenta los caracteres en una cadena manualmente
     public int contarCaracteres(String cadena) {
-        // TODO: Implementar el método para contar el número de caracteres en una cadena.
-        // Ejemplo: Si cadena = "Hello", el resultado debería ser 5.
-        return 0;
+        if (cadena == null) {
+            return 0;
+        }
+        int contador = 0;
+        for (int i = 0; i < cadena.length(); i++) {
+            contador++;
+        }
+        return contador;
     }
-
     // Método que invierte una cadena
     public String invertirCadena(String cadena) {
-        // TODO: Implementar el método para invertir una cadena.
-        // Ejemplo: Si cadena = "Hello", el resultado debería ser "olleH".
-        return "";
-    }
+        if (cadena == null) {
+            return null;
+        }
 
-    // Método que verifica si una cadena es un palíndromo
+        StringBuilder sb = new StringBuilder(cadena);
+        return sb.reverse().toString();
+    }
     public boolean esPalindromo(String cadena) {
-        // TODO: Implementar el método para verificar si una cadena es un palíndromo.
-        // Ejemplo: Si cadena = "madam", el resultado debería ser true.
-        return false;
+        if (cadena == null) {
+            return false;
+        }
+        String limpia = cadena
+                .toLowerCase()
+                .replaceAll("[^a-z0-9áéíóúñ]", "");
+        String invertida = new StringBuilder(limpia).reverse().toString();
+        return limpia.equals(invertida);
     }
 
     // Método que cuenta el número de palabras en una cadena
     public int contarPalabras(String cadena) {
-        // TODO: Implementar el método para contar el número de palabras en una cadena.
-        // Ejemplo: Si cadena = "Este es un test", el resultado debería ser 4.
-        return 0;
+        if (cadena == null || cadena.trim().isEmpty()) {
+            return 0;
+        }
+        String[] palabras = cadena.trim().split("\\s+");
+        return palabras.length;
     }
-
     // Método que convierte una cadena a mayúsculas
     public String convertirAMayusculas(String cadena) {
-        // TODO: Implementar el método para convertir una cadena a mayúsculas.
-        // Ejemplo: Si cadena = "hello", el resultado debería ser "HELLO".
-        return "";
+        if (cadena == null) {
+            return null;
+        }
+        return cadena.toUpperCase(); // Convierte toda la cadena a MAYÚSCULAS
     }
 
     // Método que convierte una cadena a minúsculas
     public String convertirAMinusculas(String cadena) {
-        // TODO: Implementar el método para convertir una cadena a minúsculas.
-        // Ejemplo: Si cadena = "HELLO", el resultado debería ser "hello".
-        return "";
+        if (cadena == null) {
+            return null;
+        }
+        return cadena.toLowerCase();
     }
 
     // Método que reemplaza una subcadena en una cadena por otra subcadena
     public String reemplazarSubcadena(String cadena, String antiguaSubcadena, String nuevaSubcadena) {
-        // TODO: Implementar el método para reemplazar una subcadena en una cadena por otra subcadena.
-        // Ejemplo: Si cadena = "Hello Java", antiguaSubcadena = "Java", y nuevaSubcadena = "world", el resultado debería ser "Hello world".
-        return "";
+        if (cadena == null || antiguaSubcadena == null || nuevaSubcadena == null) {
+            return null;
+        }
+        return cadena.replace(antiguaSubcadena, nuevaSubcadena);
     }
 
     // Método que busca una subcadena en una cadena y retorna su índice
     public int buscarSubcadena(String cadena, String subcadena) {
-        // TODO: Implementar el método para buscar una subcadena en una cadena y retornar su índice.
-        // Ejemplo: Si cadena = "Hello world" y subcadena = "world", el resultado debería ser 6.
-        return -1;
+        if (cadena == null || subcadena == null) {
+            return -1;
+        }
+        return cadena.indexOf(subcadena);
     }
 
     // Método que valida un correo electrónico
