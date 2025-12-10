@@ -30,7 +30,7 @@ public class WorkshopTest {
     public void testZoodiac() {
         assertEquals("Aries", tester.zoodiac(9,4));
         assertNotEquals("Pisces",tester.zoodiac(30,2));
-        assertEquals("Invalid Date", tester.zoodiac(31,2));
+        assertEquals("fecha invalida", tester.zoodiac(31,2));
         assertEquals("Gemini", tester.zoodiac(14,6));
         assertEquals("Cancer", tester.zoodiac(22,6));
         assertNotEquals("Leo",tester.zoodiac(30,8));

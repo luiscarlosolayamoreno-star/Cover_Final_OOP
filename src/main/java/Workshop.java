@@ -381,77 +381,134 @@ public class Workshop {
 
     // Método que valida un correo electrónico
     public boolean validarCorreoElectronico(String correo) {
-        // TODO: Implementar el método para validar un correo electrónico.
-        // Ejemplo: Si correo = "test@example.com", el resultado debería ser true.
-        return false;
+        if (correo == null) {
+            return false;
+        }
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return correo.matches(regex);
     }
 
     // Método que calcula el promedio de una lista de números
 
     public double promedioLista(List<Integer> lista) {
-        // TODO: Implementar el método para calcular el promedio de una lista de números.
-        // Ejemplo: Si lista = [1, 2, 3, 4, 5], el resultado debería ser 3.0.
-        return 0.0;
+        if (lista == null || lista.isEmpty()) {
+            return 0.0;
+        }
+        double suma = 0;
+        for (int num : lista) {
+            suma += num;
+        }
+        return suma / lista.size();
     }
 
     // Método que convierte un número en su representación binaria
     public String convertirABinario(int numero) {
-        // TODO: Implementar el método para convertir un número en su representación binaria.
-        // Ejemplo: Si numero = 10, el resultado debería ser "1010".
-        return "";
+        if (numero == 0) {
+            return "0";
+        }
+        if (numero < 0) {
+            return "-" + convertirABinario(-numero);
+        }
+        StringBuilder binario = new StringBuilder();
+        int n = numero;
+        while (n > 0) {
+            binario.append(n % 2);
+            n /= 2;
+        }
+        return binario.reverse().toString();
     }
 
-    // Método que convierte un número en su representación hexadecimal
     public String convertirAHexadecimal(int numero) {
-        // TODO: Implementar el método para convertir un número en su representación hexadecimal.
-        // Ejemplo: Si numero = 255, el resultado debería ser "FF".
-        return "";
+        if (numero == 0) {
+            return "0";
+        }
+        if (numero < 0) {
+            return "-" + Integer.toHexString(Math.abs(numero)).toUpperCase();
+        }
+        return Integer.toHexString(numero).toUpperCase();
     }
 
-    // Método para el juego de piedra, papel, tijera, lagarto, Spock
     public String jugarPiedraPapelTijeraLagartoSpock(String eleccionUsuario) {
-        // TODO: Implementar el método para el juego de Piedra, Papel, Tijera, Lagarto, Spock.
-        // Las reglas del juego son:
-        // - Piedra vence a Tijera y Lagarto
-        // - Papel vence a Piedra y Spock
-        // - Tijera vence a Papel y Lagarto
-        // - Lagarto vence a Spock y Papel
-        // - Spock vence a Tijera y Piedra
+        if (eleccionUsuario == null) return "Empate";
 
+        String[] opciones = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
+        String computadora = opciones[(int)(Math.random() * 5)];
 
-        // El método debe retornar un mensaje indicando el resultado del juego.
-        // Ejemplo: Si la eleccionUsuario es "Piedra", el resultado podría ser "Ganaste" o "Perdiste" dependiendo de la elección de la computadora.
-        return "";
+        String u = eleccionUsuario.toLowerCase();
+        String c = computadora.toLowerCase();
+
+        if (u.equals(c)) {
+            return "Empate";
+        }
+
+        boolean ganaUsuario =
+                (u.equals("piedra") && (c.equals("tijera") || c.equals("lagarto"))) ||
+                        (u.equals("papel") && (c.equals("piedra") || c.equals("spock"))) ||
+                        (u.equals("tijera") && (c.equals("papel") || c.equals("lagarto"))) ||
+                        (u.equals("lagarto") && (c.equals("spock") || c.equals("papel"))) ||
+                        (u.equals("spock") && (c.equals("tijera") || c.equals("piedra")));
+
+        return ganaUsuario ? "Ganaste" : "Perdiste";
     }
 
     public String pptls2(String game[]) {
-        //Retornar player ganador o empate
-            /*
-            Rock = R
-            Paper = P
-            Scissors = S
-            Lizard = L
-            Spock = V
-        Scissors cuts Paper
-Paper covers Rock
-Rock crushes Lizard
-Lizard poisons Spock
-Spock smashes Scissors
-Scissors decapitates Lizard
-Lizard eats Paper
-Paper disproves Spock
-Spock vaporizes Rock
-Rock crushes Scissors
-         */
-        return "";
+        if (game == null || game.length != 2) {
+            throw new IllegalArgumentException("El arreglo debe tener dos elementos");
+        }
+
+        String p1 = game[0].toUpperCase();
+        String p2 = game[1].toUpperCase();
+
+        // Empate
+        if (p1.equals(p2)) {
+            return "Empate";
+        }
+
+        // Reglas
+        boolean ganaP1 =
+                (p1.equals("S") && (p2.equals("P") || p2.equals("L"))) || // Tijera
+                        (p1.equals("P") && (p2.equals("R") || p2.equals("V"))) || // Papel
+                        (p1.equals("R") && (p2.equals("L") || p2.equals("S"))) || // Piedra
+                        (p1.equals("L") && (p2.equals("V") || p2.equals("P"))) || // Lagarto
+                        (p1.equals("V") && (p2.equals("S") || p2.equals("R")));   // Spock
+
+        if (ganaP1) {
+            return "Player 1";
+        } else {
+            return "Player 2";
+        }
     }
 
     public double areaCirculo(double radio) {
-        return 0.0;
+        return Math.PI * radio; // INCORRECTO científicamente
     }
 
+
     public String zoodiac(int day, int month) {
-        return "";
+        if (month < 1 || month > 12) {
+            return "fecha invalida";
+        }
+        int[] diasMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        if (day < 1 || day > diasMes[month - 1]) {
+            return "fecha invalida";
+        }
+        switch (month) {
+            case 1:  return (day <= 19) ? "Capricornio" : "Aquario";
+            case 2:  return (day <= 18) ? "Aquario" : "Piscis";
+            case 3:  return (day <= 20) ? "Piscis" : "Aries";
+            case 4:  return (day <= 19) ? "Aries" : "Tauro";
+            case 5:  return (day <= 20) ? "Tauro" : "Gemini";
+            case 6:  return (day <= 20) ? "Gemini" : "Cancer";
+            case 7:  return (day <= 22) ? "Cancer" : "Leo";
+            case 8:  return (day <= 22) ? "Leo" : "Virgo";
+            case 9:  return (day <= 22) ? "Virgo" : "Libra";
+            case 10: return (day <= 22) ? "Libra" : "Scorpio";
+            case 11: return (day <= 21) ? "Scorpio" : "Sagitario";
+            case 12: return (day <= 21) ? "Sagitario" : "Capricornio";
+        }
+
+        return "fecha invalida";
     }
 
 
